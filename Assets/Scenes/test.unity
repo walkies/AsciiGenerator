@@ -341,21 +341,21 @@ Prefab:
         type: 2}
       propertyPath: battlesystem
       value: 
-      objectReference: {fileID: 1259942651}
+      objectReference: {fileID: 1259942652}
     - target: {fileID: 114019720377837150, guid: 708e5e5eec6aa3443b0099d3da6c502b,
         type: 2}
       propertyPath: UI
       value: 
       objectReference: {fileID: 396367438}
+    - target: {fileID: 114019720377837150, guid: 708e5e5eec6aa3443b0099d3da6c502b,
+        type: 2}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 11400000, guid: 9b3422ffb16727f47bdeaff76cb37ac3,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 708e5e5eec6aa3443b0099d3da6c502b, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &423482215 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114019720377837150, guid: 708e5e5eec6aa3443b0099d3da6c502b,
-    type: 2}
-  m_PrefabInternal: {fileID: 423482214}
-  m_Script: {fileID: 11500000, guid: 171f60bd928aa884fb2dd9ad5f31175e, type: 3}
 --- !u!1 &662653047 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1831545848853120, guid: 708e5e5eec6aa3443b0099d3da6c502b,
@@ -646,41 +646,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a51e9b378d46e4a874cd63e16639ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageDeltToEnemies:
+  currentState: 0
+  player: {fileID: 11400000, guid: 9b3422ffb16727f47bdeaff76cb37ac3, type: 2}
+  enemy: {fileID: 0}
+  UI: {fileID: 396367438}
+  somethingToEnemies:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1967995087}
-        m_MethodName: TakeDamage
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 5
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  damageDeltToPlayer:
+  somethingToPlayer:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 423482215}
-        m_MethodName: TakeDamage
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 5
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   PlayerLoss:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 699801947}
+        m_MethodName: PlaySound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: ScriptableAudio, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   EnemyLoss:
@@ -698,11 +691,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 396367438}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  player: {fileID: 423482215}
-  enemy: {fileID: 1967995087}
-  currentState: 0
 --- !u!4 &1259942653
 Transform:
   m_ObjectHideFlags: 0
@@ -852,15 +853,15 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.42400002
       objectReference: {fileID: 0}
+    - target: {fileID: 114518002142368514, guid: 807c1371c56ebfe458439c91731e7918,
+        type: 2}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 11400000, guid: aedf14817ef984444bedb60f9db9a1d4,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 807c1371c56ebfe458439c91731e7918, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &1967995087 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114518002142368514, guid: 807c1371c56ebfe458439c91731e7918,
-    type: 2}
-  m_PrefabInternal: {fileID: 1967995086}
-  m_Script: {fileID: 11500000, guid: 01f573c877dec0d448a76eefba8a9e1f, type: 3}
 --- !u!1 &2068532338
 GameObject:
   m_ObjectHideFlags: 0

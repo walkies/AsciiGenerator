@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int Health = 10;
-    public GameObject battlesystem;
-    public GameObject UI;
+    public ScriptableStats stats;
+    public TurnBasedStateMachine battlesystem;
 
     void Start ()
     {
@@ -15,7 +14,7 @@ public class Player : MonoBehaviour
 	
 	void Update ()
     {
-        if (Health <= 0)
+        if (stats.Health <= 0)
         {
             gameObject.SetActive(false);
         }
@@ -24,21 +23,8 @@ public class Player : MonoBehaviour
     {
         if (col.gameObject.CompareTag("enemy"))
         {
-            UI.SetActive(true);
-            battlesystem.SetActive(true);
+            battlesystem.gameObject.SetActive(true);
+            battlesystem.SetEnemy(col.gameObject);
         }
     }
-    public void OnCollisionExit(Collision col)
-    {
-        if (col.gameObject.CompareTag("enemy"))
-        {
-            UI.SetActive(false);
-            battlesystem.SetActive(false);
-        }
-    }
-    public void TakeDamage(int damageTaken)
-    {
-        Health = Health - damageTaken;
-    }
-
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int Health = 10;
+    public ScriptableStats stats;
 
     void Start()
     {
@@ -13,13 +13,9 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if (Health <= 0)
+        if (stats.Health <= 0)
         {
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
-    }
-    public void TakeDamage(int damageTaken)
-    {
-        Health = Health - damageTaken;
     }
 }

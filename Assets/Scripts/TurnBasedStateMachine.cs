@@ -5,13 +5,10 @@ using UnityEngine.Events;
 
 public class TurnBasedStateMachine : MonoBehaviour
 {
-    public UnityEvent damageDeltToEnemies;
-    public UnityEvent damageDeltToPlayer;
-    public UnityEvent PlayerLoss;
-    public UnityEvent EnemyLoss;
-
-    public Player player;
+    public States currentState;
+    public ScriptableStats player;
     public Enemy enemy;
+    public GameObject UI;
 
     public enum States
     {
@@ -21,15 +18,18 @@ public class TurnBasedStateMachine : MonoBehaviour
         Win
     }
 
-    public States currentState;
+    public UnityEvent somethingToEnemies;
+    public UnityEvent somethingToPlayer;
+    public UnityEvent PlayerLoss;
+    public UnityEvent EnemyLoss;
 
-	void Start ()
+    void Start()
     {
-     
-	}
-	
+        UI.SetActive(true);
+    }
 
-	void Update ()
+
+    void Update()
     {
         Debug.Log(currentState);
         switch (currentState)
@@ -43,32 +43,45 @@ public class TurnBasedStateMachine : MonoBehaviour
             case (States.Win):
                 break;
         }
-	}
+    }
     public void NewState()
     {
         if (currentState == States.PlayerTurn)
         {
-            damageDeltToEnemies.Invoke();
-            currentState = States.EnemyTurn;
-        }
-        else if (currentState == States.EnemyTurn)
-        {
-            damageDeltToPlayer.Invoke();
-            currentState = States.PlayerTurn;
+            if (player.Health <= 0)
+            {
+                currentState = States.Loss;
+                PlayerLoss.Invoke();
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                enemy.stats.Health = enemy.stats.Health - player.Damage;
+                somethingToEnemies.Invoke();
+                currentState = States.EnemyTurn;
+                return;
+            }
         }
 
-        else if (player.Health == 0)
+        if (currentState == States.EnemyTurn)
         {
-            currentState = States.Loss;
-            PlayerLoss.Invoke();
-            gameObject.SetActive(false);
+            if (enemy.stats.Health <= 0)
+            {
+                currentState = States.Win;
+                EnemyLoss.Invoke();
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                player.Health = player.Health - enemy.stats.Damage;
+                somethingToPlayer.Invoke();
+                currentState = States.PlayerTurn;
+                return;
+            }
         }
-
-        else if (enemy.Health == 0)
-        {
-            currentState = States.Win;
-            EnemyLoss.Invoke();
-            gameObject.SetActive(false);
-        }
+    }
+    public void SetEnemy(GameObject givenEnemy)
+    {
+        enemy = givenEnemy.GetComponent<Enemy>();
     }
 }
