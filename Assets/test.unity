@@ -474,15 +474,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 1259942651}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0348a891524b254284bbc4a44fea3dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 00a51e9b378d46e4a874cd63e16639ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 2800000, guid: 4ea13195ac8269a4586192d2fb779a48, type: 3}
-  colourMappings:
-  - color: {r: 1, g: 1, b: 1, a: 1}
-    prefab: {fileID: 1831545848853120, guid: 708e5e5eec6aa3443b0099d3da6c502b, type: 2}
-  - color: {r: 0, g: 0, b: 0, a: 0}
-    prefab: {fileID: 1727856137585680, guid: 807c1371c56ebfe458439c91731e7918, type: 2}
+  playerDamage:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  EnemyDamage:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  PlayerLoss:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  EnemyLoss:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  playerHp: 0
+  enemyHp: 0
+  currentState: 0
 --- !u!4 &1259942653
 Transform:
   m_ObjectHideFlags: 0
