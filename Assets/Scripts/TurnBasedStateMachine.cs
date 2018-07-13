@@ -5,13 +5,13 @@ using UnityEngine.Events;
 
 public class TurnBasedStateMachine : MonoBehaviour
 {
-    public UnityEvent playerDamage;
-    public UnityEvent EnemyDamage;
+    public UnityEvent damageDeltToEnemies;
+    public UnityEvent damageDeltToPlayer;
     public UnityEvent PlayerLoss;
     public UnityEvent EnemyLoss;
 
-    public int playerHp;
-    public int enemyHp;
+    public Player player;
+    public Enemy enemy;
 
     public enum States
     {
@@ -25,7 +25,7 @@ public class TurnBasedStateMachine : MonoBehaviour
 
 	void Start ()
     {
-        
+     
 	}
 	
 
@@ -48,23 +48,23 @@ public class TurnBasedStateMachine : MonoBehaviour
     {
         if (currentState == States.PlayerTurn)
         {
-            EnemyDamage.Invoke();
+            damageDeltToEnemies.Invoke();
             currentState = States.EnemyTurn;
         }
         else if (currentState == States.EnemyTurn)
         {
-            playerDamage.Invoke();
+            damageDeltToPlayer.Invoke();
             currentState = States.PlayerTurn;
         }
 
-        else if (playerHp <= 0)
+        else if (player.Health == 0)
         {
             currentState = States.Loss;
             PlayerLoss.Invoke();
             gameObject.SetActive(false);
         }
 
-        else if (enemyHp <= 0)
+        else if (enemy.Health == 0)
         {
             currentState = States.Win;
             EnemyLoss.Invoke();
